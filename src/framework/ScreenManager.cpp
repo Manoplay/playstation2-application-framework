@@ -3,9 +3,12 @@
 //
 
 #include "ScreenManager.h"
+#include "System.h"
 #include <dmaKit.h>
 
 ScreenManager::ScreenManager() {
+    System::Shared()->AddResource(this);
+
     currentScreen = nullptr;
 
     gsGlobal = gsKit_init_global();
@@ -59,7 +62,7 @@ FontM ScreenManager::EmitFontMRenderable(const char *text, int x, int y) {
     return {gsFontM, x, y, text};
 }
 
-Texture ScreenManager::EmitTextureRenderable(char *path, int x, int y) {
+Texture ScreenManager::EmitTextureRenderable(const char *path, int x, int y) {
     char* extension = (char*) path + strlen(path) - 3;
     TextureType type = RAW;
     if (!strcmp(extension, "jpg")) type = JPEG;
@@ -67,4 +70,10 @@ Texture ScreenManager::EmitTextureRenderable(char *path, int x, int y) {
     if (!strcmp(extension, "bmp")) type = BMP;
     if (!strcmp(extension, "iff")) type = TIFF;
     return {gsGlobal, path, type, x, y};
+}
+
+void ScreenManager::Close() {
+    gsKit_free_fontm(gsGlobal, gsFontM);
+    gsKit_vram_clear(gsGlobal);
+    gsKit_deinit_global(gsGlobal);
 }

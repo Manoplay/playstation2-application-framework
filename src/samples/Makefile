@@ -1,4 +1,4 @@
-SUBDIRS = random_demo dvdscreensaver
+SUBDIRS = random_demo dvdscreensaver tests
 
 all: $(patsubst %, _dir_%, $(SUBDIRS))
 

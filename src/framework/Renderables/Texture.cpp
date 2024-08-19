@@ -4,6 +4,7 @@
 
 #include "Texture.h"
 #include "Color.h"
+#include "System.h"
 #include <gsKit.h>
 #include <gsToolkit.h>
 
@@ -26,30 +27,32 @@ void Texture::Render(GSGLOBAL * gsGlobal) {
 
 }
 
-Texture::Texture(GSGLOBAL* gsGlobal, char *path, TextureType type, int x, int y): x(x), y(y) {
+Texture::Texture(GSGLOBAL* gsGlobal, const char *path, TextureType type, int x, int y): gsglobal(gsGlobal), x(x), y(y) {
+    System::Shared()->AddResource(this);
     texture.Delayed = true;
+    char* xpath = const_cast<char *>(path);
     switch (type) {
         case PNG:
-            gsKit_texture_png(gsGlobal, &texture, path);
+            gsKit_texture_png(gsGlobal, &texture, xpath);
             break;
         case BMP:
-            gsKit_texture_bmp(gsGlobal, &texture, path);
+            gsKit_texture_bmp(gsGlobal, &texture, xpath);
             break;
         case JPEG:
-            gsKit_texture_jpeg(gsGlobal, &texture, path);
+            gsKit_texture_jpeg(gsGlobal, &texture, xpath);
             break;
         case RAW:
-            gsKit_texture_raw(gsGlobal, &texture, path);
+            gsKit_texture_raw(gsGlobal, &texture, xpath);
             break;
         case TIFF:
-            gsKit_texture_tiff(gsGlobal, &texture, path);
+            gsKit_texture_tiff(gsGlobal, &texture, xpath);
             break;
     }
     w = texture.Width;
     h = texture.Height;
 }
 
-Texture::Texture(): texture(), x(0), y(0), w(0), h(0) {
+Texture::Texture(): gsglobal(nullptr), texture(), x(0), y(0), w(0), h(0) {
 
 }
 
@@ -64,4 +67,8 @@ int Texture::GetWidth() const {
 
 int Texture::GetHeight() const {
     return h;
+}
+
+void Texture::Close() {
+    gsKit_TexManager_free(gsglobal, &texture);
 }

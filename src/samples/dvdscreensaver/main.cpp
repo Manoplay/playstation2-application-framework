@@ -9,6 +9,7 @@
 class MainScreen: public Screen {
 public:
     explicit MainScreen(ScreenManager* manager): opX(1), opY(1), bkg(0, 0, manager->GetGSGLobal()->Width, manager->GetGSGLobal()->Height, Colors::Red), x(0), y(0) {
+
         pafLogo = manager->EmitTextureRenderable("host:res/paf.tiff", 0, 0);
         SetRenderableCount(2);
         renderables[0] = &bkg;

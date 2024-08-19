@@ -37,4 +37,8 @@ namespace Console {
     int GetY() {
         return scr_getY();
     }
+
+    void WriteString(const std::string & string) {
+        Write("%s", string.c_str());
+    }
 }

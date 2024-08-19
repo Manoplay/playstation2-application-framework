@@ -8,6 +8,7 @@
 #include <cstdio>
 #include "Renderable.h"
 #include "Color.h"
+#include "Closeable.h"
 
 class FontM: public Renderable {
 public:
@@ -15,7 +16,6 @@ public:
     FontM(GSFONTM* fontM, int x, int y, const char* message, unsigned long color = Colors::Black);
     void Move(int x, int y);
     void SetText(const char* newText);
-
     FontM() = default;
 
 private:
