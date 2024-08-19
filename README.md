@@ -38,3 +38,13 @@ To build and install from source (which is currently the only way), just grab th
     make install
 
 in the root directory.
+
+## Samples
+
+### DVD Screensaver
+
+In this sample, a bouncing PAF text will move on the screen, changing direction every time it hits a corner.
+
+![DVD Screensaver](img/dvd.gif)
+
+Located at `src/samples/dvdscreensaver`.

@@ -19,12 +19,16 @@ class Texture: public Renderable {
 public:
     Texture(GSGLOBAL *gsGlobal, char *path, TextureType type, int x, int y);
     Texture();
+    int GetWidth() const;
+    int GetHeight() const;
     void Move(int x, int y);
     void Render(GSGLOBAL *) override;
 private:
     GSTEXTURE texture{};
     int x;
     int y;
+    int w;
+    int h;
 };
 
 #endif //PS2APP_TEXTURE_H

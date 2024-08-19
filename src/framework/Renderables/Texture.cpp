@@ -45,13 +45,23 @@ Texture::Texture(GSGLOBAL* gsGlobal, char *path, TextureType type, int x, int y)
             gsKit_texture_tiff(gsGlobal, &texture, path);
             break;
     }
+    w = texture.Width;
+    h = texture.Height;
 }
 
-Texture::Texture(): texture(), x(0), y(0) {
+Texture::Texture(): texture(), x(0), y(0), w(0), h(0) {
 
 }
 
 void Texture::Move(int x, int y) {
     this->x = x;
     this->y = y;
+}
+
+int Texture::GetWidth() const {
+    return w;
+}
+
+int Texture::GetHeight() const {
+    return h;
 }
