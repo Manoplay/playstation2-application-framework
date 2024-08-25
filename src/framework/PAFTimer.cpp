@@ -4,31 +4,24 @@
 
 #include "PAFTimer.h"
 
-static void timer_callback(struct timer_alarm_t *alarm, void *arg);
+static unsigned long timer_callback(int id, unsigned long scheduled_time, unsigned long actual_time, void *arg, void *pc_value);
 
 Timer::Timer(int time) {
-    InitializeTimerAlarm(&intimer);
-    SetTimerAlarm(&intimer, MSec2TimerBusClock(time), &timer_callback, &flag);
+//    InitializeTimerAlarm(&intimer);
+    intimer = SetTimerAlarm(MSec2TimerBusClock(time), reinterpret_cast<timer_alarm_handler_t>(&timer_callback), &flag);
 }
 
 bool Timer::Check() const {
     return flag;
 }
 
-void Timer::Retime(int newTime) {
-    SetTimerAlarm(&intimer, MSec2TimerBusClock(newTime), &timer_callback, &flag);
-}
-
-void Timer::Start() {
-    flag = false;
-    StartTimerAlarm(&intimer);
-}
-
 void Timer::Stop() {
     flag = false;
-    StopTimerAlarm(&intimer);
+    ReleaseTimerAlarm(intimer);
 }
 
-void timer_callback(struct timer_alarm_t *alarm, void *arg) {
+unsigned long timer_callback(int id, unsigned long scheduled_time, unsigned long actual_time, void *arg, void *pc_value) {
     *(bool*)arg = true;
+    ReleaseTimerAlarm(id);
+    return 0;
 }

@@ -6,18 +6,18 @@
 #include "Screen.h"
 
 void Screen::Render(GSGLOBAL* gsGlobal) {
-    for (int i = 0; i < renderableCount; i++)
-        renderables[i]->Render(gsGlobal);
+    for (auto & Renderable : Renderables)
+        Renderable->Render(gsGlobal);
 }
 
-unsigned long Screen::GetBackgroundColor() {
+unsigned long Screen::GetBackgroundColor() const {
     return bkColor;
 }
 
-void Screen::SetRenderableCount(int newCount) {
+/* void Screen::SetRenderableCount(int newCount) {
     if (renderableCount == 0)
         renderables = static_cast<Renderable **>(malloc(sizeof(Renderable *) * newCount));
     else
         renderables = static_cast<Renderable **>(realloc(renderables, sizeof(Renderable *) * newCount));
     renderableCount = newCount;
-}
+} */

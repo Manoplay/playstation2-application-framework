@@ -2,10 +2,6 @@
 // Created by Alessandro Mascolo on 19/08/24.
 //
 
-#pragma region Enabling features
-#define ENABLE_SHUTDOWN
-#pragma endregion
-
 #include <Console.h>
 #include <Path.h>
 #include <sys/unistd.h>

@@ -6,7 +6,7 @@
 #include <libpwroff.h>
 #include <sifrpc.h>
 #include <loadfile.h>
-#include <cstdio>
+#include <stdio.h>
 
 System* System::instance = new System();
 
@@ -15,7 +15,6 @@ System *System::Shared() {
 }
 
 void System::Shutdown() {
-#ifdef ENABLE_SHUTDOWN
     SifInitRpc(0);
     int result;
     SifLoadFileInit();
@@ -29,9 +28,6 @@ void System::Shutdown() {
         closeable->Close();
     }
     poweroffShutdown();
-#else
-    printf("Shutdown disabled.\n");
-#endif
 }
 
 void System::AddResource(Closeable* closeable) {

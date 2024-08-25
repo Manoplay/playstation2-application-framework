@@ -15,11 +15,8 @@ public:
         this->mainMessage = screenManager->EmitFontMRenderable("Hello", 20, 20);
         this->testPic = screenManager->EmitTextureRenderable("host:res/alpha.tiff", 60, 60);
         bkColor = Colors::BlueTrans;
-        SetRenderableCount(3);
-        renderables[0] = &mainMessage;
-        renderables[1] = &testPic;
-        renderables[2] = &square;
-        timer.Start();
+        // SetRenderableCount(3);
+        Renderables = {&mainMessage, &testPic, &square};
     }
 
     void Update() override {

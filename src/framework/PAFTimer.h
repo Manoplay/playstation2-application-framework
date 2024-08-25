@@ -13,12 +13,10 @@
 class Timer {
 public:
     explicit Timer(int time);
-    void Retime(int newTime);
-    bool Check() const;
-    void Start();
+    [[nodiscard]] bool Check() const;
     void Stop();
 private:
-    struct timer_alarm_t intimer{};
+    signed int intimer = 0;
     bool flag = false;
 
 };

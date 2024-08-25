@@ -14,12 +14,12 @@ public:
     virtual void PreUpdate() = 0;
     virtual void Update() = 0;
     void Render(GSGLOBAL* gsGlobal) override;
-    unsigned long GetBackgroundColor();
-    void SetRenderableCount(int newCount);
+    [[nodiscard]] unsigned long GetBackgroundColor() const;
+    // void SetRenderableCount(int newCount);
 
 protected:
-    int renderableCount = 0;
-    Renderable** renderables = nullptr;
+    // int renderableCount = 0;
+    std::vector<Renderable*> Renderables = {};
     unsigned long bkColor = Colors::White;
 };
 

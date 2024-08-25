@@ -33,7 +33,7 @@ EE_LIB_DIRS += -L$(GSKIT)/lib -L$(PS2SDK)/ports/lib -L$(PS2SDK)/paf/lib
 EE_BIN = dvdscreensaver.elf
 EE_OBJS =  $(patsubst %.cpp,%.o,$(shell find . -type f -name "*.cpp"))
 EE_LDFLAGS += $(EE_LIB_DIRS)
-EE_LIBS = -lpaf -ldebug -lgskit -ldmakit -lcdvd -lpatches -lgskit_toolkit -ltiff -ljpeg -lpng -lz -lpad
+EE_LIBS = -lpaf -ldebug -lgskit -ldmakit -lcdvd -lpatches -lgskit_toolkit -ltiff -ljpeg -lpng -lz -lpad -lpoweroff
 
 all: $(EE_BIN)
 
