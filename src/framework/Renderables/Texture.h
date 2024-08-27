@@ -21,8 +21,9 @@ public:
     Texture(GSGLOBAL *gsGlobal, const char *path, TextureType type, int x, int y);
     Texture();
     void Close() override;
-    int GetWidth() const;
-    int GetHeight() const;
+    [[nodiscard]] unsigned int GetWidth() const;
+    [[nodiscard]] unsigned int GetHeight() const;
+    void SetAlpha(float a);
     void Move(int x, int y);
     void Render(GSGLOBAL *) override;
 private:
@@ -30,8 +31,9 @@ private:
     GSTEXTURE texture{};
     int x;
     int y;
-    int w;
-    int h;
+    unsigned int w;
+    unsigned int h;
+    float alpha;
 };
 
 #endif //PS2APP_TEXTURE_H
