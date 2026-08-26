@@ -13,9 +13,9 @@
 class FontM: public Renderable {
 public:
     void Render(GSGLOBAL *) override;
-    FontM(GSFONTM* fontM, int x, int y, const char* message, unsigned long color = Colors::Black);
+    FontM(GSFONTM* fontM, int x, int y, std::string message, unsigned long color = Colors::Black);
     void Move(int x, int y);
-    void SetText(const char* newText);
+    void SetText(std::string newText);
     FontM() = default;
 
 private:
@@ -23,7 +23,7 @@ private:
     int x = 0;
     int y = 0;
     unsigned long color = Colors::Black;
-    char* message{};
+    std::string message{};
 };
 
 #endif //PS2APP_FONTM_H

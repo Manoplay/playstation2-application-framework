@@ -5,16 +5,14 @@
 #include "FontM.h"
 #include <gsKit.h>
 #include <cstring>
-#include <cstdlib>
+#include <utility>
 
 void FontM::Render(GSGLOBAL * gsglobal) {
-    gsKit_fontm_print(gsglobal, gsfontm, x, y, 3, color, message);
+    gsKit_fontm_print(gsglobal, gsfontm, x, y, 3, color, message.c_str())
 }
 
-FontM::FontM(GSFONTM *fontM, int x, int y, const char* message, unsigned long color): gsfontm(fontM), x(x), y(y), color(color) {
+FontM::FontM(GSFONTM *fontM, int x, int y, std::string message, unsigned long color): gsfontm(fontM), x(x), y(y), color(color), message(std::move(message)) {
     // this->message = new char [strlen(message) + 1];
-    this->message = static_cast<char *>(malloc(sizeof(char) * strlen(message) + 1));
-    strcpy(this->message, message);
 }
 
 void FontM::Move(int x, int y) {
@@ -22,8 +20,8 @@ void FontM::Move(int x, int y) {
     this->y = y;
 }
 
-void FontM::SetText(const char *newText) {
+void FontM::SetText(std::string newText) {
     // delete this->message;
     // this->message = new char [strlen(message) + 1];
-    strcpy(this->message, newText);
+    message = std::move(newText);
 }

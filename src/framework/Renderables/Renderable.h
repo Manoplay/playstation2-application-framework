@@ -9,6 +9,8 @@
 
 class Renderable {
 public:
+    virtual ~Renderable() = default;
+
     virtual void Render(GSGLOBAL*) = 0;
 };
 

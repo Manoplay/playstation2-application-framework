@@ -5,7 +5,6 @@
 #ifndef PS2APP_SCREEN_H
 #define PS2APP_SCREEN_H
 
-#include <cstdio>
 #include "Renderable.h"
 #include "Color.h"
 

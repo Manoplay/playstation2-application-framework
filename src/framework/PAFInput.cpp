@@ -11,7 +11,7 @@
 Input *Input::instance = new Input();
 
 Input *Input::Shared() {
-    return Input::instance;
+    return instance;
 }
 
 Input::Input() {
@@ -55,7 +55,7 @@ void Input::waitPadReady() {
 }
 
 bool Input::GetButton(int button) {
-    struct padButtonStatus buttons{};
+    padButtonStatus buttons{};
     padRead(0, 0, &buttons);
     oldPad = (0xffff ^ buttons.btns);
     return oldPad & button;
@@ -72,7 +72,7 @@ void Input::StopRumble(bool small) {
 }
 
 bool Input::GetButtonDown(int button) {
-    struct padButtonStatus buttons{};
+    padButtonStatus buttons{};
     padRead(0, 0, &buttons);
     int padData = 0xffff ^ buttons.btns;
     int newPad = padData & ~oldPad;
